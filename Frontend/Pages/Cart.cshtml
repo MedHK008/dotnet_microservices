@@ -1,0 +1,175 @@
+@page
+@model Frontend.Pages.CartModel
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+        }
+        .header {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .cart-items {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        .item-info {
+            flex: 1;
+        }
+        .item-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .item-price {
+            font-size: 16px;
+            color: #667eea;
+        }
+        .item-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .quantity-input {
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .remove-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .total-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: right;
+        }
+        .total-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+        .total-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #667eea;
+            margin-top: 10px;
+        }
+        .clear-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Shopping Cart</h1>
+    </div>
+
+    <div class="container">
+        <a href="/Products" class="back-link">← Back to Products</a>
+
+        @if (Model.CartItems.Any())
+        {
+            <div class="cart-items">
+                @foreach (var item in Model.CartItems)
+                {
+                    <div class="cart-item">
+                        <div class="item-info">
+                            <div class="item-name">@item.ProductName</div>
+                            <div class="item-price">$@item.Price.ToString("F2") × @item.Quantity</div>
+                        </div>
+                        <div class="item-actions">
+                            <form method="post" asp-page-handler="UpdateQuantity" style="display: inline;">
+                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                <input type="number" name="quantity" value="@item.Quantity" min="0" class="quantity-input" onchange="this.form.submit()" />
+                            </form>
+                            <form method="post" asp-page-handler="Remove" style="display: inline;">
+                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                <button type="submit" class="remove-btn">Remove</button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="total-section">
+                <div class="total-text">Total</div>
+                <div class="total-amount">$@Model.Total.ToString("F2")</div>
+                <form method="post" asp-page-handler="Clear">
+                    <button type="submit" class="clear-btn">Clear Cart</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="cart-items">
+                <div class="empty-cart">
+                    <h2>Your cart is empty</h2>
+                    <p>Add some products to get started!</p>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>
