@@ -32,7 +32,7 @@ jobs:
 
       # 4. Run tests
       - name: Run tests
-        run: dotnet test dotnet_microservices.sln --no-build --verbosity normal
+        run: dotnet test dotnet_microservices.sln --configuration Release --verbosity normal
 
       # 5. Set up gcloud CLI
       - name: Set up gcloud
