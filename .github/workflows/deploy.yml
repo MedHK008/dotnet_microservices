@@ -69,6 +69,24 @@ jobs:
       # 10. Deploy to GKE
       - name: Deploy to GKE
         run: |
-          kubectl set image deployment/frontend frontend=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/frontend:${{ github.sha }} --record || kubectl apply -f k8s/frontend-deployment.yaml
-          kubectl set image deployment/authservice authservice=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/authservice:${{ github.sha }} --record || kubectl apply -f k8s/authservice-deployment.yaml
-          kubectl set image deployment/catalogservice catalogservice=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/catalogservice:${{ github.sha }} --record || kubectl apply -f k8s/catalogservice-deployment.yaml
+          # Create namespace if it doesn't exist
+          kubectl apply -f k8s/namespace.yaml
+          
+          # Apply all Kubernetes manifests
+          kubectl apply -f k8s/authservice-deployment.yaml
+          kubectl apply -f k8s/catalogservice-deployment.yaml
+          kubectl apply -f k8s/frontend-deployment.yaml
+          kubectl apply -f k8s/ingress.yaml
+          
+          # Update the deployment images to the new version
+          kubectl set image deployment/frontend frontend=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/frontend:${{ github.sha }} -n microservices
+          kubectl set image deployment/authservice authservice=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/authservice:${{ github.sha }} -n microservices
+          kubectl set image deployment/catalogservice catalogservice=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/catalogservice:${{ github.sha }} -n microservices
+          
+          # Wait for rollout to complete
+          kubectl rollout status deployment/frontend -n microservices
+          kubectl rollout status deployment/authservice -n microservices
+          kubectl rollout status deployment/catalogservice -n microservices
+          
+          # Display deployment status
+          kubectl get pods -n microservices
