@@ -36,14 +36,22 @@ namespace CatalogService.Migrations
                 columns: new[] { "Id", "CreatedAt", "Description", "ImageUrl", "Name", "Price", "Stock" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 10, 27, 14, 5, 14, 964, DateTimeKind.Utc).AddTicks(9173), "High-performance laptop with 16GB RAM and 512GB SSD", "https://ik.imagekit.io/demo/laptop.jpg", "Laptop Pro 15", 1299.99m, 50 },
-                    { 2, new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4811), "Ergonomic wireless mouse with precision tracking", "https://ik.imagekit.io/demo/mouse.jpg", "Wireless Mouse", 29.99m, 200 },
-                    { 3, new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4829), "RGB mechanical keyboard with blue switches", "https://ik.imagekit.io/demo/keyboard.jpg", "Mechanical Keyboard", 89.99m, 75 },
-                    { 4, new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4833), "27-inch 4K UHD monitor with HDR support", "https://ik.imagekit.io/demo/monitor.jpg", "4K Monitor", 449.99m, 30 },
-                    { 5, new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4837), "7-in-1 USB-C hub with HDMI and ethernet ports", "https://ik.imagekit.io/demo/hub.jpg", "USB-C Hub", 49.99m, 150 },
-                    { 6, new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4840), "1080p HD webcam with built-in microphone", "https://ik.imagekit.io/demo/webcam.jpg", "Webcam HD", 69.99m, 100 },
-                    { 7, new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4843), "Noise-cancelling over-ear headphones", "https://ik.imagekit.io/demo/headphones.jpg", "Headphones Pro", 199.99m, 60 },
-                    { 8, new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4846), "Portable external SSD with USB 3.2 Gen 2", "https://ik.imagekit.io/demo/ssd.jpg", "External SSD 1TB", 129.99m, 80 }
+                    // ...existing code...
+                        { 1, new DateTime(2025, 10, 27, 14, 5, 14, 964, DateTimeKind.Utc).AddTicks(9173), "High-performance laptop with 16GB RAM and 512GB SSD", "https://ik.imagekit.io/MedHerak/products/laptop.jpeg?updatedAt=1761677974008", "Laptop Pro 15", 1299.99m, 50 },
+                    // ...existing code...
+                        { 2, new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4811), "Ergonomic wireless mouse with precision tracking", "https://ik.imagekit.io/MedHerak/products/mouse.jpg?updatedAt=1761677974066", "Wireless Mouse", 29.99m, 200 },
+                    // ...existing code...
+                        { 3, new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4829), "RGB mechanical keyboard with blue switches", "https://ik.imagekit.io/MedHerak/products/keyboard.jpg?updatedAt=1761677974064", "Mechanical Keyboard", 89.99m, 75 },
+                    // ...existing code...
+                        { 4, new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4833), "27-inch 4K UHD monitor with HDR support", "https://ik.imagekit.io/MedHerak/products/monitor.png?updatedAt=1761677974086", "4K Monitor", 449.99m, 30 },
+                    // ...existing code...
+                        { 5, new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4837), "7-in-1 USB-C hub with HDMI and ethernet ports", "https://ik.imagekit.io/MedHerak/products/hub.webp?updatedAt=1761677974386", "USB-C Hub", 49.99m, 150 },
+                    // ...existing code...
+                        { 6, new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4840), "1080p HD webcam with built-in microphone", "https://ik.imagekit.io/MedHerak/products/cam.webp?updatedAt=1761677974061", "Webcam HD", 69.99m, 100 },
+                    // ...existing code...
+                        { 7, new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4843), "Noise-cancelling over-ear headphones", "https://ik.imagekit.io/MedHerak/products/photo-1505740420928-5e560c06d30e_7tWlfCNAr.avif?updatedAt=1759220323847", "Headphones Pro", 199.99m, 60 },
+                    // ...existing code...
+                        { 8, new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4846), "Portable external SSD with USB 3.2 Gen 2", "https://ik.imagekit.io/MedHerak/products/ssd.jpg?updatedAt=1761677973996", "External SSD 1TB", 129.99m, 80 }
                 });
         }
 

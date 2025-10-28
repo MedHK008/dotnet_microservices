@@ -64,7 +64,7 @@ namespace CatalogService.Migrations
                             Id = 1,
                             CreatedAt = new DateTime(2025, 10, 27, 14, 5, 14, 964, DateTimeKind.Utc).AddTicks(9173),
                             Description = "High-performance laptop with 16GB RAM and 512GB SSD",
-                            ImageUrl = "https://ik.imagekit.io/demo/laptop.jpg",
+                                ImageUrl = "https://ik.imagekit.io/MedHerak/products/laptop.jpeg?updatedAt=1761677974008",
                             Name = "Laptop Pro 15",
                             Price = 1299.99m,
                             Stock = 50
@@ -74,7 +74,7 @@ namespace CatalogService.Migrations
                             Id = 2,
                             CreatedAt = new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4811),
                             Description = "Ergonomic wireless mouse with precision tracking",
-                            ImageUrl = "https://ik.imagekit.io/demo/mouse.jpg",
+                                ImageUrl = "https://ik.imagekit.io/MedHerak/products/mouse.jpg?updatedAt=1761677974066",
                             Name = "Wireless Mouse",
                             Price = 29.99m,
                             Stock = 200
@@ -84,7 +84,7 @@ namespace CatalogService.Migrations
                             Id = 3,
                             CreatedAt = new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4829),
                             Description = "RGB mechanical keyboard with blue switches",
-                            ImageUrl = "https://ik.imagekit.io/demo/keyboard.jpg",
+                                ImageUrl = "https://ik.imagekit.io/MedHerak/products/keyboard.jpg?updatedAt=1761677974064",
                             Name = "Mechanical Keyboard",
                             Price = 89.99m,
                             Stock = 75
@@ -94,7 +94,7 @@ namespace CatalogService.Migrations
                             Id = 4,
                             CreatedAt = new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4833),
                             Description = "27-inch 4K UHD monitor with HDR support",
-                            ImageUrl = "https://ik.imagekit.io/demo/monitor.jpg",
+                                ImageUrl = "https://ik.imagekit.io/MedHerak/products/monitor.png?updatedAt=1761677974086",
                             Name = "4K Monitor",
                             Price = 449.99m,
                             Stock = 30
@@ -104,7 +104,7 @@ namespace CatalogService.Migrations
                             Id = 5,
                             CreatedAt = new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4837),
                             Description = "7-in-1 USB-C hub with HDMI and ethernet ports",
-                            ImageUrl = "https://ik.imagekit.io/demo/hub.jpg",
+                                ImageUrl = "https://ik.imagekit.io/MedHerak/products/hub.webp?updatedAt=1761677974386",
                             Name = "USB-C Hub",
                             Price = 49.99m,
                             Stock = 150
@@ -114,7 +114,7 @@ namespace CatalogService.Migrations
                             Id = 6,
                             CreatedAt = new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4840),
                             Description = "1080p HD webcam with built-in microphone",
-                            ImageUrl = "https://ik.imagekit.io/demo/webcam.jpg",
+                                ImageUrl = "https://ik.imagekit.io/MedHerak/products/cam.webp?updatedAt=1761677974061",
                             Name = "Webcam HD",
                             Price = 69.99m,
                             Stock = 100
@@ -124,7 +124,7 @@ namespace CatalogService.Migrations
                             Id = 7,
                             CreatedAt = new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4843),
                             Description = "Noise-cancelling over-ear headphones",
-                            ImageUrl = "https://ik.imagekit.io/demo/headphones.jpg",
+                                ImageUrl = "https://ik.imagekit.io/MedHerak/products/photo-1505740420928-5e560c06d30e_7tWlfCNAr.avif?updatedAt=1759220323847",
                             Name = "Headphones Pro",
                             Price = 199.99m,
                             Stock = 60
@@ -134,7 +134,7 @@ namespace CatalogService.Migrations
                             Id = 8,
                             CreatedAt = new DateTime(2025, 10, 27, 14, 5, 14, 965, DateTimeKind.Utc).AddTicks(4846),
                             Description = "Portable external SSD with USB 3.2 Gen 2",
-                            ImageUrl = "https://ik.imagekit.io/demo/ssd.jpg",
+                                ImageUrl = "https://ik.imagekit.io/MedHerak/products/ssd.jpg?updatedAt=1761677973996",
                             Name = "External SSD 1TB",
                             Price = 129.99m,
                             Stock = 80
