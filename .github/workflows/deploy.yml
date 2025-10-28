@@ -1,0 +1,72 @@
+name: Build, Test, Deploy to GKE
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT }}
+  REGION: ${{ secrets.GCP_REGION }}
+  CLUSTER_NAME: ${{ secrets.GKE_CLUSTER }}
+  REPO_NAME: microservices-repo
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Set up .NET
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # 3. Restore dependencies and build
+      - name: Restore and Build
+        run: dotnet build dotnet_microservices.sln --configuration Release
+
+      # 4. Run tests
+      - name: Run tests
+        run: dotnet test dotnet_microservices.sln --no-build --verbosity normal
+
+      # 5. Set up gcloud CLI
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      # 6. Authenticate Docker with Artifact Registry
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev --quiet
+
+      # 7. Build and push Docker images
+      - name: Build and Push Docker Images
+        run: |
+          docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/frontend:${{ github.sha }} ./Frontend
+          docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/authservice:${{ github.sha }} ./AuthService
+          docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/catalogservice:${{ github.sha }} ./CatalogService
+
+          docker push $REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/frontend:${{ github.sha }}
+          docker push $REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/authservice:${{ github.sha }}
+          docker push $REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/catalogservice:${{ github.sha }}
+
+      # 8. Connect to GKE
+      - name: Get GKE credentials
+        uses: google-github-actions/get-gke-credentials@v2
+        with:
+          cluster_name: ${{ env.CLUSTER_NAME }}
+          location: ${{ env.REGION }}
+
+      # 9. Deploy to GKE
+      - name: Deploy to GKE
+        run: |
+          kubectl set image deployment/frontend frontend=$REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/frontend:${{ github.sha }} --record || kubectl apply -f k8s/frontend-deployment.yaml
+          kubectl set image deployment/authservice authservice=$REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/authservice:${{ github.sha }} --record || kubectl apply -f k8s/authservice-deployment.yaml
+          kubectl set image deployment/catalogservice catalogservice=$REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/catalogservice:${{ github.sha }} --record || kubectl apply -f k8s/catalogservice-deployment.yaml
